@@ -181,30 +181,6 @@ def register():
 
     return render_template('register.html')
 
-import sqlite3
-
-conn = sqlite3.connect('database.db')
-c = conn.cursor()
-
-# Drop the old table (if exists)
-c.execute("DROP TABLE IF EXISTS applications;")
-
-# Create the correct table
-c.execute("""
-CREATE TABLE applications (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    job_id INTEGER,
-    candidate_name TEXT,
-    resume TEXT
-)
-""")
-
-conn.commit()
-conn.close()
-print("Applications table recreated successfully!")
-
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
