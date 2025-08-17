@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Candidate Dashboard</h1>
+<p>Welcome, {{ session['username'] }}!</p>
+
+<h2>Your Applications</h2>
+<table>
+    <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Resume</th>
+    </tr>
+    {% for app in applications %}
+    <tr>
+        <td>{{ app[1] }}</td>
+        <td>{{ app[2] }}</td>
+        <td><a href="{{ url_for('static', filename='uploads/' + app[3]) }}" target="_blank">View Resume</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

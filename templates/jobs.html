@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>All Job Listings</h1>
+<form method="get">
+    <input type="text" name="search" placeholder="Search jobs..." value="{{ request.args.get('search','') }}">
+    <input type="submit" value="Search">
+</form>
+<div class="jobs-grid">
+    {% for job in jobs %}
+    <div class="job-card">
+        <h3>{{ job[1] }}</h3>
+        <p><strong>{{ job[2] }}</strong> - {{ job[3] }}</p>
+        <a href="{{ url_for('job_detail', job_id=job[0]) }}"><button>View Details</button></a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

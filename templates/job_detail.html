@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ job[1] }}</h1>
+<p><strong>Company:</strong> {{ job[2] }}</p>
+<p><strong>Location:</strong> {{ job[3] }}</p>
+<p><strong>Description:</strong> {{ job[4] }}</p>
+
+{% if session.get('role') == 'candidate' %}
+<h2>Apply for this Job</h2>
+<form method="POST" action="{{ url_for('apply', job_id=job[0]) }}" enctype="multipart/form-data">
+    <label>Upload Resume:</label>
+    <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
+    <input type="submit" value="Apply">
+</form>
+{% else %}
+<p><em>Login as candidate to apply.</em></p>
+{% endif %}
+
+{% endblock %}

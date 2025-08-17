@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="hero">
+    <img src="{{ url_for('static', filename='hero_banner.jpg') }}" alt="Opportunity">
+    <div class="hero-text">
+        <h1>Welcome to JobBoard!</h1>
+        <p>Discover opportunities and find your dream job today.</p>
+        {% if 'username' in session %}
+            <p>Hello, {{ session['username'] }}!</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Featured Jobs -->
+<h2>Featured Jobs</h2>
+<div class="jobs-grid">
+    {% for job in jobs %}
+    <div class="job-card">
+        <h3>{{ job[1] }}</h3>
+        <p>{{ job[2] }} - {{ job[3] }}</p>
+        <a href="{{ url_for('job_detail', job_id=job[0]) }}"><button>View Details</button></a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
