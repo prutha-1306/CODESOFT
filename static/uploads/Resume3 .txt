@@ -1,0 +1,11 @@
+Name: Vaishali Mehta
+Email: vaishali.mehta@example.com
+Phone: +91-9123456780
+Education: Bachelor of Information Technology, ABC College
+Skills: Python, Django, MySQL, HTML/CSS, ReactJS
+Experience:
+
+Internship at DataWorks — Created dashboards and data visualizations
+
+Volunteer at CodeClub — Assisted in teaching Python to students
+Summary: Enthusiastic IT graduate with knowledge of backend development and database management.
