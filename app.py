@@ -26,7 +26,7 @@ def home():
     c.execute("SELECT * FROM jobs LIMIT 5")
     jobs = c.fetchall()
     conn.close()
-    return render_template('home.html', jobs=jobs)
+    return render_template('home.html', jobs=jobs, title="TalentHub")
 
 # All jobs
 @app.route('/jobs')
