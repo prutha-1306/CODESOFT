@@ -25,4 +25,15 @@
     {% endfor %}
 </div>
 
+<footer>
+    <p>Phone: {{ website_info.phone }}</p>
+    <p>Email: {{ website_info.email }}</p>
+    <p>
+        <a href="{{ website_info.instagram }}">Instagram</a> |
+        <a href="{{ website_info.linkedin }}">LinkedIn</a> |
+        <a href="{{ website_info.facebook }}">Facebook</a>
+    </p>
+</footer>
+
+
 {% endblock %}
