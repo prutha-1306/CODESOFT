@@ -1,19 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ job[1] }}</h1>
-<p><strong>Company:</strong> {{ job[2] }}</p>
-<p><strong>Location:</strong> {{ job[3] }}</p>
-<p><strong>Description:</strong> {{ job[4] }}</p>
+<div class="job-detail-card">
+    <h2>{{ job[1] }}</h2>
+    <p><strong>Company:</strong> {{ job[2] }}</p>
+    <p><strong>Location:</strong> {{ job[3] }}</p>
+    <p><strong>Description:</strong> {{ job[4] }}</p>
+    <p><strong>Salary:</strong> {{ job[5] }}</p>
+    <p><strong>Joining Date:</strong> {{ job[6] }}</p>
+    <p><strong>Qualifications:</strong> {{ job[7] }}</p>
+    <p><strong>Experience:</strong> {{ job[8] }}</p>
 
-{% if session.get('role') == 'candidate' %}
-<h2>Apply for this Job</h2>
-<form method="POST" action="{{ url_for('apply', job_id=job[0]) }}" enctype="multipart/form-data">
-    <label>Upload Resume:</label>
-    <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
-    <input type="submit" value="Apply">
-</form>
-{% else %}
-<p><em>Login as candidate to apply.</em></p>
-{% endif %}
+    {% if session.get('role') == 'candidate' %}
+    <form action="{{ url_for('apply', job_id=job[0]) }}" method="POST" enctype="multipart/form-data">
+        <label>User ID:</label>
+        <input type="text" name="user_id" required>
 
+        <label>Mobile Number:</label>
+        <input type="text" name="mobile" required>
+
+        <label>Upload Resume:</label>
+        <input type="file" name="resume" required>
+
+        <input type="submit" value="Apply Job">
+    </form>
+    {% endif %}
+</div>
 {% endblock %}
+
