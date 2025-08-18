@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Employer Dashboard</h1>
-<p>Welcome, {{ session['username'] }}!</p>
+<h2>Employer Dashboard</h2>
 
-<h2>Post a New Job</h2>
-<form method="POST" action="{{ url_for('add_job') }}">
+<h3>Add New Job</h3>
+<form action="{{ url_for('add_job') }}" method="POST">
     <label>Job Title:</label>
     <input type="text" name="title" required>
 
@@ -12,18 +11,33 @@
     <input type="text" name="location" required>
 
     <label>Description:</label>
-    <textarea name="description" rows="4" required></textarea>
+    <textarea name="description" required></textarea>
+
+    <label>Salary (per month):</label>
+    <input type="text" name="salary" required>
+
+    <label>Joining Date:</label>
+    <input type="date" name="joining_date" required>
+
+    <label>Qualifications:</label>
+    <textarea name="qualifications" required></textarea>
+
+    <label>Experience:</label>
+    <textarea name="experience" required></textarea>
 
     <input type="submit" value="Add Job">
 </form>
-
-<h2>Posted Jobs</h2>
+<h3>Existing Jobs</h3>
 <div class="jobs-grid">
     {% for job in jobs %}
     <div class="job-card">
         <h3>{{ job[1] }}</h3>
-        <p>{{ job[3] }}</p>
-        <a href="{{ url_for('job_detail', job_id=job[0]) }}"><button>View Details</button></a>
+        <p><strong>Location:</strong> {{ job[3] }}</p>
+        <p><strong>Salary:</strong> {{ job[5] }}</p>
+        <p><strong>Joining Date:</strong> {{ job[6] }}</p>
+        <p><strong>Qualifications:</strong> {{ job[7] }}</p>
+        <p><strong>Experience:</strong> {{ job[8] }}</p>
+        <a href="{{ url_for('job_detail', job_id=job[0]) }}">View Details</a>
     </div>
     {% endfor %}
 </div>
