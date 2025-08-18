@@ -35,3 +35,14 @@ Create a virtual environment (optional but recommended):
 
 **Open your browser and visit:**
 http://127.0.0.1:5000/
+
+**Project Structure**
+TalentHub/
+│-- app.py              # Main Flask app
+│-- create_db.py        # Database setup script
+│-- database.db         # SQLite database file
+│-- requirements.txt    # Python dependencies
+│-- static/             # CSS, Images, JS files
+│-- templates/          # HTML templates
+└── README.md           # Project documentation
+
