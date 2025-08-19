@@ -1,21 +1,40 @@
+# Quiz Maker
 
-# Online Quiz Maker - Simple Flask App
+A web-based application that allows users to create, take, and manage quizzes. Built using Python (Flask), HTML, CSS, and JavaScript.
 
-## Quick setup (Linux / macOS / Windows with Python 3.8+)
+## Features
 
-1. Create a virtual environment:
-   python -m venv venv
-   source venv/bin/activate   # macOS/Linux
-   venv\Scripts\activate    # Windows PowerShell
+- **User Registration & Login**: Secure user accounts for quiz participation.
+- **Create Quizzes**: Users can add questions, multiple-choice options, and correct answers.
+- **Take Quizzes**: Interactive quiz interface with immediate feedback and results.
+- **View Results**: Users can view scores and performance history.
+- **Responsive Design**: Works on desktops and mobile devices.
 
-2. Install requirements:
-   pip install -r requirements.txt
+## Technologies Used
 
-3. Run the app:
-   python app.py
+- **Backend**: Python, Flask
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap
+- **Database**: SQLite
+- **Version Control**: Git & GitHub
 
-4. Open http://127.0.0.1:5000/ in your browser.
+## Installation
 
-Notes:
-- Default secret_key in app.py should be changed for production.
-- Database (data.db) will be created automatically on first run.
+1. Clone the repository:
+
+```bash
+git clone https://github.com/YourUsername/YourRepoName.git
+
+****Open your browser and visit:****
+
+http://127.0.0.1:5000/
+
+****Project Structure****
+Project2/
+│
+├── app.py                # Main Flask application
+├── requirements.txt      # Python dependencies
+├── schema.sql            # Database schema
+├── static/               # CSS, JS, images
+├── templates/            # HTML templates
+├── README.md             # Project documentation
+└── database.db           # SQLite database (if included)
