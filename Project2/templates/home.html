@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero with only welcome text on image -->
+<div class="hero" style="background-image: url('{{ url_for('static', filename='images/home-bg.jpg') }}');">
+  <div class="hero-overlay">
+    <h1>Welcome to ThinkUp</h1>
+    <p class="lead">Create your quiz and test knowledge!</p>
+  </div>
+</div>
+
+<!-- Buttons below hero -->
+<div class="text-center mt-4">
+  <a href="{% if user %}{{ url_for('create_quiz') }}{% else %}{{ url_for('login') }}{% endif %}" class="btn btn-primary btn-lg me-2">Create Quiz</a>
+  <a href="{{ url_for('quizzes') }}" class="btn btn-success btn-lg">Browse Quizzes</a>
+</div>
+
+<!-- Info below buttons -->
+<div class="how-it-works text-center mt-5">
+  <h2>How it works</h2>
+  <p>Register / Login → Create a quiz with multiple-choice questions → Share or take quizzes → Get instant feedback and track results</p>
+
+  <h2 class="mt-4">Why use it?</h2>
+  <p>Quick to set up | Responsive on all devices | Immediate scoring</p>
+</div>
+{% endblock %}

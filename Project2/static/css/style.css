@@ -1,0 +1,92 @@
+/* ---------- Galaxy themed style.css ---------- */
+
+/* Body & background */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background-color: #0b0c1a;
+  color: #fff;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(10,10,20,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.navbar-brand { color: #fff !important; font-weight:700; }
+.navbar .nav-link { color: #cfd8dc !important; margin-left: 12px; }
+.navbar .nav-link:hover { color: #ffffff !important; background: rgba(255,255,255,0.02); border-radius:6px; }
+
+/* Hero */
+.hero {
+  background-position: center;
+  background-size: cover;
+  height: 58vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+  padding: 40px;
+  border-radius: 12px;
+  text-align:center;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+.hero-overlay h1 {
+  font-size: 3.2rem;
+  color: #74f2ff;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 30px rgba(116,242,255,0.12);
+}
+.hero-overlay p { font-size:1.2rem; color:#e8faff; }
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+  border: none;
+  color: #fff;
+}
+.btn-success {
+  background: linear-gradient(90deg, #00b894, #00e0a8);
+  border: none;
+  color: #000;
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #fff;
+}
+
+/* Cards */
+.card {
+  background: linear-gradient(180deg, rgba(8,10,25,0.8), rgba(16,20,40,0.8));
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* Forms */
+input.form-control, select.form-select {
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* How it works */
+.how-it-works h2 { color: #ffd36a; margin-top: 20px; }
+.how-it-works p { color: #dfefff; }
+
+/* Footer */
+footer {
+  background: rgba(0,0,0,0.7);
+  padding: 18px 0;
+  margin-top: 30px;
+  color: #bfefff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-overlay h1 { font-size: 2rem; }
+  .hero { height: 45vh; }
+}

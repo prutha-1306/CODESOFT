@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ quiz.title }}</h2>
+
+<div id="quiz-container" class="mt-3"></div>
+
+<script>
+const questions = {{ questions|tojson }};
+let current = 0;
+let answers = {};
+
+function renderQuestion() {
+  const c = document.getElementById('quiz-container');
+  if (current >= questions.length) {
+    submitQuiz();
+    return;
+  }
+  const q = questions[current];
+  let html = `<div class="card p-3">
+    <h5>Q${current+1}: ${q.question}</h5>
+    <div>`;
+  q.options.forEach(opt=>{
+    html += `<div class="form-check">
+      <input class="form-check-input" type="radio" name="opt" id="opt${opt.id}" value="${opt.id}">
+      <label class="form-check-label" for="opt${opt.id}">${opt.option_text}</label>
+    </div>`;
+  });
+  html += `</div>
+    <div class="mt-3">
+      <button id="nextBtn" class="btn btn-primary">Next</button>
+    </div>
+  </div>`;
+  c.innerHTML = html;
+  document.getElementById('nextBtn').onclick = ()=>{
+    const sel = document.querySelector('input[name="opt"]:checked');
+    if (sel) {
+      answers[q.id] = sel.value;
+      current++;
+      renderQuestion();
+    } else {
+      alert("Please select an option.");
+    }
+  };
+}
+
+async function submitQuiz() {
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = `<div class="text-center p-4">Submitting...</div>`;
+  const resp = await fetch("{{ url_for('submit_quiz', quiz_id=quiz.id) }}", {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({answers})
+  });
+  const data = await resp.json();
+  // render scoreboard with Exit button
+  let html = `<div class="card p-3 text-center">
+    <h3>Score: ${data.score} / ${data.total}</h3>
+    <div class="mt-3">`;
+  html += `<button id="exitBtn" class="btn btn-secondary">Exit</button>`;
+  html += `</div></div>`;
+  c.innerHTML = html;
+  document.getElementById('exitBtn').onclick = ()=> window.location.href = "{{ url_for('quizzes') }}";
+}
+
+renderQuestion();
+</script>
+{% endblock %}

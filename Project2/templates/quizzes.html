@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Available Quizzes</h2>
+{% for subject, quizzes in quizzes_by_subject.items() %}
+  <h4 class="mt-3">{{ subject }}</h4>
+  <div class="row">
+    {% for q in quizzes %}
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ q.title }}</h5>
+          <p class="card-text">By: {{ q.username if q.username else 'Anonymous' }}</p>
+          <p class="card-text"><small>Created at: {{ q.created_at }}</small></p>
+          <a href="{{ url_for('take_quiz', quiz_id=q.id) }}" class="btn btn-primary">Take Quiz</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+{% endblock %}

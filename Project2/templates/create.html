@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create Quiz</h2>
+<div class="card p-3">
+  <form id="quizForm" method="post">
+    <div class="mb-3">
+      <label class="form-label">Quiz Title</label>
+      <input class="form-control" name="title" id="title" required>
+    </div>
+
+    <div id="questionsArea"></div>
+
+    <div class="d-flex gap-2 mt-3">
+      <button type="button" class="btn btn-outline-secondary" id="addQuestionBtn">Add Question</button>
+      <button type="button" class="btn btn-secondary" id="clearBtn">Clear</button>
+      <button type="submit" class="btn btn-primary">Save Quiz</button>
+    </div>
+    <input type="hidden" name="data" id="dataField">
+  </form>
+</div>
+
+<script>
+// Basic client-side builder for questions
+let questions = [];
+
+function renderQuestions(){
+  const area = document.getElementById("questionsArea");
+  area.innerHTML = "";
+  questions.forEach((q, idx) => {
+    const div = document.createElement("div");
+    div.className = "mb-3 p-3 border rounded bg-dark text-white";
+    div.innerHTML = `
+      <label class="form-label">Q${idx+1}: Question</label>
+      <input class="form-control mb-2 q-text" data-idx="${idx}" value="${q.question}">
+      <div class="mb-2">
+        ${q.options.map((o,i)=>`
+          <div class="input-group mb-1">
+            <span class="input-group-text">${i+1}</span>
+            <input class="form-control opt-text" data-idx="${idx}" data-opt="${i}" value="${o}">
+            <button type="button" class="btn btn-outline-success set-correct" data-idx="${idx}" data-opt="${i}">${q.correct===i? "✓": "set correct"}</button>
+            <button type="button" class="btn btn-outline-danger remove-opt" data-idx="${idx}" data-opt="${i}">x</button>
+          </div>`).join("")}
+      </div>
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-sm btn-secondary add-opt" data-idx="${idx}">Add Option</button>
+        <button type="button" class="btn btn-sm btn-danger remove-q" data-idx="${idx}">Remove Question</button>
+      </div>
+    `;
+    area.appendChild(div);
+  });
+  attachHandlers();
+}
+
+function attachHandlers(){
+  document.querySelectorAll(".q-text").forEach(inp=> inp.oninput = e=> questions[+e.target.dataset.idx].question = e.target.value );
+  document.querySelectorAll(".opt-text").forEach(inp=> inp.oninput = e=> questions[+e.target.dataset.idx].options[+e.target.dataset.opt] = e.target.value );
+  document.querySelectorAll(".set-correct").forEach(btn=> btn.onclick = e=> {
+    const idx = +e.target.dataset.idx; const opt = +e.target.dataset.opt;
+    questions[idx].correct = opt;
+    renderQuestions();
+  });
+  document.querySelectorAll(".remove-opt").forEach(btn=> btn.onclick = e=> {
+    const idx = +e.target.dataset.idx; const opt = +e.target.dataset.opt;
+    questions[idx].options.splice(opt,1);
+    if (questions[idx].correct >= questions[idx].options.length) questions[idx].correct = 0;
+    renderQuestions();
+  });
+  document.querySelectorAll(".add-opt").forEach(btn=> btn.onclick = e=> {
+    const idx = +e.target.dataset.idx;
+    questions[idx].options.push("New option");
+    renderQuestions();
+  });
+  document.querySelectorAll(".remove-q").forEach(btn=> btn.onclick = e=> {
+    const idx = +e.target.dataset.idx;
+    questions.splice(idx,1);
+    renderQuestions();
+  });
+}
+
+document.getElementById("addQuestionBtn").onclick = ()=>{
+  questions.push({question: "Sample question", options: ["Option A","Option B","Option C","Option D"], correct: 0});
+  renderQuestions();
+};
+
+document.getElementById("clearBtn").onclick = ()=>{ questions=[]; renderQuestions(); };
+
+document.getElementById("quizForm").onsubmit = function(e){
+  e.preventDefault();
+  document.getElementById("dataField").value = JSON.stringify(questions);
+  this.submit();
+};
+
+// Initialize with one question
+questions.push({question: "Sample question", options: ["Option A","Option B","Option C","Option D"], correct: 0});
+renderQuestions();
+</script>
+{% endblock %}
